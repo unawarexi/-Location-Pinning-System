@@ -1,31 +1,50 @@
 const mongoose = require("mongoose");
 
 // Define the Customer schema
-const customerSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
+const customerSchema = new mongoose.Schema(
+  {
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      match: [/.+\@.+\..+/, "Please fill a valid email address"],
+    },
+    address: {
+      street: {
+        type: String,
+        required: true,
+      },
+      city: {
+        type: String,
+        required: true,
+      },
+      state: {
+        type: String,
+        required: true,
+      },
+      zip: {
+        type: String,
+        required: true,
+        match: [/^\d{5}$/, "Please fill a valid 5-digit zip code"],
+      },
+      country: {
+        type: String,
+        required: true,
+      },
+    },
   },
-  address: {
-    type: String,
-    required: true,
-  },
-  contact: {
-    type: String,
-    required: true,
-  },
-  lat: {
-    type: Number,
-    required: true,
-  },
-  lng: {
-    type: Number,
-    required: true,
-  },
-});
+  { timestamps: true }
+);
 
 // Create the Customer model
-const Customer = mongoose.model("Customer", customerSchema);
+const customer = mongoose.model("Customer", customerSchema);
 
-// Export the Customer model
-module.exports = Customer;
+module.exports = customer;
