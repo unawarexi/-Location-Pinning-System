@@ -85,6 +85,7 @@ const GetStarted = () => {
                 value={formData.email}
                 onChange={handleChange}
                 className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                required
               />
             </div>
 
@@ -102,13 +103,14 @@ const GetStarted = () => {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3  leading-8 transition-colors duration-200 ease-in-out"
+                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                required
               />
             </div>
 
             <button
               type="submit"
-              className={`text-white border-0 py-2 px-6 focus:outline-none w-full  rounded text-lg ${
+              className={`text-white border-0 py-2 px-6 focus:outline-none w-full rounded text-lg ${
                 isLogin
                   ? " bg-gray-500 hover:bg-gray-600 "
                   : "bg-indigo-500 hover:bg-indigo-600"

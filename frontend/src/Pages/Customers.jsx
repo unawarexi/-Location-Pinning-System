@@ -42,7 +42,7 @@ const Customers = () => {
                     vegan taxidermy. Gastropub indxgo juice poutine.
                   </p>
                   <a className="mt-3 text-blue-500 inline-flex items-center">
-                    Learn More
+                    View details
                     <svg
                       fill="none"
                       stroke="currentColor"
@@ -83,7 +83,7 @@ const Customers = () => {
                     vegan taxidermy. Gastropub indxgo juice poutine.
                   </p>
                   <a className="mt-3 text-blue-500 inline-flex items-center">
-                    Learn More
+                    View details
                     <svg
                       fill="none"
                       stroke="currentColor"
