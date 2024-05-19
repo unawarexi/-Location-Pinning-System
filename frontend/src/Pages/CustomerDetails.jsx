@@ -2,11 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { getCustomerById, deleteCustomer } from "../apis/CustomerCRUD";
 import { DetailSpinner } from "../animations/Spinners";
+import axios from "axios";
+
+const API_KEY = "AIzaSyDvMXISE_eS_n6IpW8JV2pT8p7XtYWh2Ek"; // replace with your actual API key
 
 const CustomerDetails = () => {
   const { id } = useParams();
   const [customer, setCustomer] = useState(null);
-  //  const [loading, setLoading] = useState(true);
+  const [distance, setDistance] = useState(null);
+  const [isPinned, setIsPinned] = useState(false);
+  const [currentLocation, setCurrentLocation] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,15 +19,99 @@ const CustomerDetails = () => {
       try {
         const response = await getCustomerById(id);
         setCustomer(response.data);
-        //    setLoading(false);
+
+        // getting the latitude and longitude of the customer address
+        const customerLatLng = await getLatLng(response.data.address);
+        if (customerLatLng) {
+          const customerLocation = {
+            lat: customerLatLng.lat,
+            lng: customerLatLng.lng,
+          };
+
+          // Fetch current location using ip address
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+              (position) => {
+                const currentLocation = {
+                  lat: position.coords.latitude,
+                  lng: position.coords.longitude,
+                };
+                setCurrentLocation(currentLocation);
+
+                // Calculated result distance between current ip and desired location
+                const calculatedDistance = calculateDistance(
+                  currentLocation,
+                  customerLocation
+                );
+                setDistance(calculatedDistance);
+              },
+              (error) =>
+                console.error("Error fetching current location:", error),
+              { enableHighAccuracy: true }
+            );
+          } else {
+            console.error("Geolocation is not supported by this browser.");
+          }
+        }
       } catch (error) {
         console.error("Error fetching customer details:", error);
-        //    setLoading(false);
       }
     };
 
     fetchCustomer();
   }, [id]);
+
+  //---------------------------------------- adding up customers location and user ip to get distance
+  const getLatLng = async (address) => {
+    const fullAddress = `${address.street}, ${address.city}, ${address.state}, ${address.zip}, ${address.country}`;
+    try {
+      const response = await axios.get(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
+          fullAddress
+        )}&key=${API_KEY}`
+      );
+      if (response.data.results.length > 0) {
+        return response.data.results[0].geometry.location;
+      }
+      return null;
+    } catch (error) {
+      console.error("Error fetching geolocation:", error);
+      return null;
+    }
+  };
+
+  /**
+   *  using lattitude and longitude to determine position
+   *  here is where the main calculation kicks off
+   * fun fact: i myself is a little confused here
+   *
+   * @param {*------ this is loaction 1} loc1
+   * @param {* --------- this is location 2} loc2
+   * @returns
+   */
+  const calculateDistance = (loc1, loc2) => {
+    const toRad = (value) => (value * Math.PI) / 180;
+
+    const R = 6371; // in kilometers
+    const dLat = toRad(loc2.lat - loc1.lat);
+    const dLon = toRad(loc2.lng - loc1.lng);
+    const lat1 = toRad(loc1.lat);
+    const lat2 = toRad(loc2.lat);
+
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const d = R * c;
+    return d.toFixed(2);
+  };
+
+  // -------------------------- pin location
+  const togglePin = () => {
+    setIsPinned(!isPinned);
+  };
+
+  //------------------------  handles the delete functionality
 
   const handleDelete = async () => {
     const confirmed = window.confirm(
@@ -73,6 +162,9 @@ const CustomerDetails = () => {
                 {customer.address.state}, {customer.address.zip},{" "}
                 {customer.address.country}
               </p>
+              {distance && (
+                <p className="mt-2 text-indigo-500">Distance: {distance} km</p>
+              )}
             </div>
             <div className="lg:w-1/2 px-6 mt-4 lg:mt-0">
               <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">
@@ -138,6 +230,16 @@ const CustomerDetails = () => {
               delete {customer.firstName}
             </button>
           </div>
+          <button
+            onClick={togglePin}
+            className={`mt-4 py-2 px-6 rounded text-lg ${
+              isPinned
+                ? "bg-green-500 hover:bg-green-600"
+                : "bg-yellow-500 hover:bg-yellow-600"
+            } text-white`}
+          >
+            {isPinned ? "Unpin Location" : "Pin Location"}
+          </button>
         </div>
       </div>
     </section>
