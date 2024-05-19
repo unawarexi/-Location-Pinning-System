@@ -9,19 +9,19 @@ const {
 } = require("../controllers/CustomerController");
 const UserAuth = require("../middleware/UserAuth");
 
-// Route for creating a new customer
-router.post("/", UserAuth, createCustomer);
+router.post("/", createCustomer);
 
-// Route for getting all customers
-router.get("/", UserAuth, getAllCustomers);
+router.get("/", getAllCustomers);
 
 // Route for getting a single customer by ID
-router.get("/:id", UserAuth, getCustomerById);
+router.get("/:id", getCustomerById);
 
 // Route for updating a customer
-router.put("/:id", UserAuth, updateCustomer);
+router.put("/:id", updateCustomer);
 
 // Route for deleting a customer
-router.delete("/:id", UserAuth, deleteCustomer);
+router.delete("/:id", deleteCustomer);
+
+router.use(UserAuth);
 
 module.exports = router;
