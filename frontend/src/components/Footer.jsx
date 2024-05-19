@@ -15,19 +15,21 @@ const Footer = () => {
             className="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
             viewBox="0 0 24 24"
           >
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"></path>
+            <circle cx="12" cy="9" r="2.5"></circle>
           </svg>
-          <span className="ml-3 text-xl">Tailblocks</span>
+
+          <span className="ml-3 text-sm">Customer Location System</span>
         </a>
         <p className="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">
-          © 2020 Tailblocks —
+          © 2024 CLS —
           <a
-            href="https://twitter.com/knyttneve"
+            href="https://x.com/oliggarchy"
             className="text-gray-600 ml-1"
             rel="noopener noreferrer"
             target="_blank"
           >
-            @knyttneve
+            @Andrew Chukwuweike
           </a>
         </p>
         <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">

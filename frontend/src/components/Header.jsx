@@ -32,12 +32,14 @@ const Header = () => {
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
-            class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
+            className="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
             viewBox="0 0 24 24"
           >
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"></path>
+            <circle cx="12" cy="9" r="2.5"></circle>
           </svg>
-          <span className="ml-3 text-xl">Location System</span>
+
+          <span className="ml-3 text-xl">Customer Location System</span>
         </Link>
 
         <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
