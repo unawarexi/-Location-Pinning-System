@@ -33,8 +33,12 @@ const customerSchema = new mongoose.Schema(
       zip: {
         type: String,
         required: true,
-        match: [/^\d{5}$/, "Please fill a valid 5-digit zip code"],
+        match: [
+          /^(?:[A-Z0-9]+([- ]?[A-Z0-9]+)*)?$/,
+          "Please fill a valid ZIP code",
+        ],
       },
+
       country: {
         type: String,
         required: true,
