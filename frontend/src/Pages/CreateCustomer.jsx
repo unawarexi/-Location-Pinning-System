@@ -1,58 +1,73 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { CustomerForm } from "../components/ExportComponents";
 import { MdPerson, MdMarkunreadMailbox } from "react-icons/md";
 import { FaEnvelope, FaHome, FaCity } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
+import { createCustomer } from "../apis/CustomerCRUD";
+import { customerImage } from "../assets/Images";
 
 const CreateCustomer = () => {
-  const [FirstName, setFirstName] = useState("");
-  const [LastName, setLastName] = useState("");
-  const [CustomerEmail, setCustomerEmail] = useState("");
-  const [StreetAddress, setStreetAddress] = useState("");
-  const [City, setCity] = useState("");
-  const [State, setState] = useState("");
-  const [Zip, setZip] = useState("");
-  const [Country, setCountry] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [customerEmail, setCustomerEmail] = useState("");
+  const [streetAddress, setStreetAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [zip, setZip] = useState("");
+  const [country, setCountry] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await createCustomer({
+        // Call createCustomer API with customer data
+        firstName,
+        lastName,
+        email: customerEmail,
+        address: {
+          street: streetAddress,
+          city,
+          state,
+          zip,
+          country,
+        },
+      });
+      // Clear form after successful submission
+      setFirstName("");
+      setLastName("");
+      setCustomerEmail("");
+      setStreetAddress("");
+      setCity("");
+      setState("");
+      setZip("");
+      setCountry("");
+    } catch (error) {
+      console.error("Error creating customer:", error);
+    }
+  };
 
   return (
     <section className="text-gray-600 body-font relative">
-      <div className="container px-5 py-24 mx-auto flex sm:flex-nowrap flex-wrap">
-        <div className="lg:w-2/3 md:w-1/2 bg-gray-300 rounded-lg overflow-hidden sm:mr-10 p-10 flex items-end justify-start relative">
-          <iframe
-            width="100%"
-            height="100%"
-            className="absolute inset-0"
-            frameBorder="0"
-            title="map"
-            marginHeight="0"
-            marginWidth="0"
-            scrolling="no"
-            src="https://maps.google.com/maps?width=100%&height=600&hl=en&q=%C4%B0zmir+(My%20Business%20Name)&ie=UTF8&t=&z=14&iwloc=B&output=embed"
-            style={{ filter: "grayscale(1) contrast(1.2) opacity(0.4)" }}
-          ></iframe>
-          <div className="bg-white relative flex flex-wrap py-6 rounded shadow-md">
-            <div className="lg:w-1/2 px-6">
-              <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">
-                ADDRESS
-              </h2>
-              <p className="mt-1">
-                Photo booth tattooed prism, portland taiyaki hoodie neutra
-                typewriter
-              </p>
-            </div>
-            <div className="lg:w-1/2 px-6 mt-4 lg:mt-0">
-              <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">
-                EMAIL
-              </h2>
-              <a className="text-indigo-500 leading-relaxed">
-                example@email.com
-              </a>
-              <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">
-                PHONE
-              </h2>
-              <p className="leading-relaxed">123-456-7890</p>
-            </div>
+      <div className="container px-5 pt-24 mx-auto flex flex-wrap">
+        <div className="flex justify-between items-center py-6 border-b border-gray-200 mb-6 w-full">
+          <div>
+            <h1 className="text-4xl text-gray-800">Customers</h1>
           </div>
+
+          <div className="bg-blue-500 px-4 py-2 rounded-full text-white font-semibold hover:bg-blue-700">
+            <Link to="/customers">customers list</Link>
+          </div>
+        </div>
+      </div>
+
+      <div className="container px-5 py-5 mx-auto flex sm:flex-nowrap flex-wrap">
+        <div className="lg:w-2/3 md:w-1/2 rounded-lg overflow-hidden sm:mr-10 p-10 flex items-center justify-center relative">
+          <img
+            src={customerImage}
+            alt="customer hero image"
+            className="object-cover w-full"
+          />
         </div>
 
         {/* {===================================  FORMS =================================} */}
@@ -64,47 +79,47 @@ const CreateCustomer = () => {
             Post-ironic portland shabby chic echo park, banjo fashion axe
           </p>
 
-          <div>
+          <form onSubmit={handleSubmit} className="w-full">
             <div className="flex flex-col w-full items-center justify-center gap-6 px-4 md:px-12 py-4 ">
               <CustomerForm
                 placeHolder={"First Name Here"}
                 icon={<MdPerson className="text-xl text-textColor" />}
-                inputState={FirstName}
+                inputState={firstName}
                 inputStateFunc={setFirstName}
                 type="text"
               />
               <CustomerForm
                 placeHolder={"Last Name Here"}
                 icon={<MdPerson className="text-xl text-textColor" />}
-                inputState={LastName}
+                inputState={lastName}
                 inputStateFunc={setLastName}
                 type="text"
               />
               <CustomerForm
                 placeHolder={"Email Here"}
                 icon={<FaEnvelope className="text-xl text-textColor" />}
-                inputState={CustomerEmail}
+                inputState={customerEmail}
                 inputStateFunc={setCustomerEmail}
                 type="email"
               />
               <CustomerForm
                 placeHolder={"Street Address"}
                 icon={<FaHome className="text-xl text-textColor" />}
-                inputState={StreetAddress}
+                inputState={streetAddress}
                 inputStateFunc={setStreetAddress}
                 type="text"
               />
               <CustomerForm
                 placeHolder={"City"}
                 icon={<FaLocationDot className="text-xl text-textColor" />}
-                inputState={City}
+                inputState={city}
                 inputStateFunc={setCity}
                 type="text"
               />
               <CustomerForm
                 placeHolder={"State"}
                 icon={<FaCity className="text-xl text-textColor" />}
-                inputState={State}
+                inputState={state}
                 inputStateFunc={setState}
                 type="text"
               />
@@ -113,26 +128,26 @@ const CreateCustomer = () => {
                 icon={
                   <MdMarkunreadMailbox className="text-xl text-textColor" />
                 }
-                inputState={Zip}
+                inputState={zip}
                 inputStateFunc={setZip}
                 type="text"
               />
               <CustomerForm
                 placeHolder={"Country"}
                 icon={<FaCity className="text-xl text-textColor" />}
-                inputState={Country}
+                inputState={country}
                 inputStateFunc={setCountry}
                 type="text"
               />
             </div>
-          </div>
+            <button
+              type="submit"
+              className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg w-full"
+            >
+              Register
+            </button>
+          </form>
 
-          <button
-            type="submit"
-            className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
-          >
-            Register
-          </button>
           <p className="text-xs text-gray-500 mt-3">
             Chicharrones blog helvetica normcore iceland tousled brook viral
             artisan.

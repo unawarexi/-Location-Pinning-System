@@ -13,7 +13,7 @@ const CustomerDetails = () => {
     const fetchCustomer = async () => {
       try {
         const response = await getCustomerById(id);
-        setCustomer(response.data); // Ensure we are setting the correct data
+        setCustomer(response.data);
         //    setLoading(false);
       } catch (error) {
         console.error("Error fetching customer details:", error);
