@@ -14,8 +14,8 @@ const CustomerForm = ({
       <input
         type={type}
         placeholder={placeHolder}
-        value={inputState} // Use inputState instead of formData
-        onChange={(e) => inputStateFunc(e.target.value)} // Use onChange to update input state
+        value={inputState}
+        onChange={(e) => inputStateFunc(e.target.value)}
         className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-sm lg:text-base md:text-base outline-none text-gray-700
          md:py-3 lg:py-1 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
       />
