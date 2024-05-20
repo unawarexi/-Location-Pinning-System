@@ -1,5 +1,4 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const cors = require("cors");
 const { connectDB } = require("./config/dbconfig");
 
@@ -12,7 +11,7 @@ const app = express();
 app.use(
   cors({
     origin: ["https://system-location.vercel.app"],
-    methods: ["POST, GET, PUT, UPDATE, DELETE"],
+    methods: ["post", "get", "put", "update", "delete"],
     credentials: true,
   })
 );
