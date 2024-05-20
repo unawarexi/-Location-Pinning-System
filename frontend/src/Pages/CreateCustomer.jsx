@@ -21,7 +21,7 @@ const CreateCustomer = () => {
     e.preventDefault();
     try {
       await createCustomer({
-        // Call createCustomer API with customer data
+        //------------------------ Call createCustomer API with customer data
         firstName,
         lastName,
         email: customerEmail,
@@ -33,7 +33,7 @@ const CreateCustomer = () => {
           country,
         },
       });
-      // Clear form after successful submission
+      //---------------------------- Clear form after successful submission
       setFirstName("");
       setLastName("");
       setCustomerEmail("");
@@ -52,17 +52,19 @@ const CreateCustomer = () => {
       <div className="container px-5 pt-24 mx-auto flex flex-wrap">
         <div className="flex justify-between items-center py-6 border-b border-gray-200 mb-6 w-full">
           <div>
-            <h1 className="text-4xl text-gray-800">Customers</h1>
+            <h1 className="lg:text-4xl text-lg text-gray-800">Lets register</h1>
           </div>
 
           <div className="bg-blue-500 px-4 py-2 rounded-full text-white font-semibold hover:bg-blue-700">
-            <Link to="/customers">customers list</Link>
+            <Link to="/customers" className="text-sm lg:text-base">
+              customers list
+            </Link>
           </div>
         </div>
       </div>
 
-      <div className="container px-5 py-5 mx-auto flex sm:flex-nowrap flex-wrap">
-        <div className="lg:w-2/3 md:w-1/2 rounded-lg overflow-hidden sm:mr-10 p-10 flex items-center justify-center relative">
+      <div className="container px-5 py-5 mx-auto flex flex-col lg:flex-row   md:justify-center md:items-center sm:flex-nowrap flex-wrap">
+        <div className="lg:w-2/3 md:w-full rounded-lg overflow-hidden sm:mr-10 p-10 flex items-center justify-center relative">
           <img
             src={customerImage}
             alt="customer hero image"
@@ -71,12 +73,12 @@ const CreateCustomer = () => {
         </div>
 
         {/* {===================================  FORMS =================================} */}
-        <div className="lg:w-1/3 md:w-1/2 bg-white flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0">
+        <div className="lg:w-1/3 md:w-full bg-white flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0">
           <h2 className="text-gray-900 text-lg mb-1 font-medium title-font">
             Register
           </h2>
-          <p className="leading-relaxed mb-5 text-gray-600">
-            Post-ironic portland shabby chic echo park, banjo fashion axe
+          <p className="leading-relaxed mb-5 text-gray-600 text-[13px] lg:text-base">
+            Give us customer information and pin point next delivery faster.
           </p>
 
           <form onSubmit={handleSubmit} className="w-full">
@@ -149,8 +151,8 @@ const CreateCustomer = () => {
           </form>
 
           <p className="text-xs text-gray-500 mt-3">
-            Chicharrones blog helvetica normcore iceland tousled brook viral
-            artisan.
+            Create, verify, save and explore clients from all over the world in
+            one go
           </p>
         </div>
       </div>

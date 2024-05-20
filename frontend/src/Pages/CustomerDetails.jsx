@@ -136,8 +136,8 @@ const CustomerDetails = () => {
 
   return (
     <section className="text-gray-600 body-font relative">
-      <div className="container px-5 py-24 mx-auto flex sm:flex-nowrap flex-wrap">
-        <div className="lg:w-2/3 md:w-1/2 bg-gray-300 rounded-lg overflow-hidden sm:mr-10 p-10 flex items-end justify-start relative">
+      <div className="container px-5 py-24 mx-auto flex flex-col lg:flex-row sm:flex-nowrap flex-wrap">
+        <div className="lg:w-2/3 md:w-full h-[500px] lg:h-[700px] bg-gray-300 shadow-lg shadow-gray-500  rounded-lg overflow-hidden sm:mr-10 p-10 flex items-end justify-start relative">
           <iframe
             width="100%"
             height="100%"
@@ -152,43 +152,45 @@ const CustomerDetails = () => {
             )} ${encodeURIComponent(customer.address.city)}&output=embed`}
             style={{ filter: "contrast(1.2)" }}
           ></iframe>
-          <div className="bg-white relative flex flex-wrap py-6 rounded shadow-md">
+          <div className="bg-white relative flex md:flex-col lg:flex-row flex-wrap py-4 md:py-6 lg:py-6 rounded shadow-md">
             <div className="lg:w-1/2 px-6">
-              <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">
+              <h2 className="title-font font-semibold text-gray-900 tracking-widest text-[10px] md:text-xs lg:text-xs">
                 ADDRESS
               </h2>
-              <p className="mt-1">
+              <p className="mt-1 text-[10px] lg:text-base md:text-base">
                 {customer.address.street}, {customer.address.city},{" "}
                 {customer.address.state}, {customer.address.zip},{" "}
                 {customer.address.country}
               </p>
               {distance && (
-                <p className="mt-2 text-indigo-500">Distance: {distance} km</p>
+                <p className="mt-2 text-indigo-500 text-[10px] md:text-base lg:text-base">
+                  Distance: {distance} km
+                </p>
               )}
             </div>
             <div className="lg:w-1/2 px-6 mt-4 lg:mt-0">
-              <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">
+              <h2 className="title-font font-semibold text-gray-900 tracking-widest text-[10px] md:text-base lg:text-base">
                 EMAIL
               </h2>
-              <a className="text-indigo-500 leading-relaxed">
+              <a className="text-indigo-500 leading-relaxed text-[10px] md:text-base lg:text-base">
                 {customer.email}
               </a>
             </div>
           </div>
         </div>
-        <div className="lg:w-1/3 md:w-1/2 bg-white flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0">
+        <div className="lg:w-1/3 md:w-full bg-white flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0">
           <div className="bg-black/5 px-4 py-4 rounded-lg">
-            <h2 className="text-gray-900 text-lg mb-1 font-medium title-font">
+            <h2 className="text-gray-900 mb-1 font-medium title-font text-sm md:text-lg lg:text-lg">
               Customer Details
             </h2>
-            <p className="leading-relaxed mb-5 text-gray-600">
+            <p className="leading-relaxed mb-5 text-gray-600 text-[13px] md:text-base lg:text-base">
               Detailed information about the customer.
             </p>
             <div className="relative mb-4">
               <h2 className="leading-7 text-sm text-gray-600 font-semibold">
                 Name
               </h2>
-              <p>
+              <p className="text-[13px] md:text-base lg:text-base">
                 {customer.firstName} {customer.lastName}
               </p>
             </div>
@@ -196,13 +198,15 @@ const CustomerDetails = () => {
               <h2 className="leading-7 text-sm text-gray-600 font-semibold">
                 Email
               </h2>
-              <p>{customer.email}</p>
+              <p className="text-[13px] md:text-base lg:text-base">
+                {customer.email}
+              </p>
             </div>
             <div className="relative mb-4">
               <h2 className="leading-7 text-sm text-gray-600 font-semibold">
                 Address
               </h2>
-              <p>
+              <p className="text-[13px] md:text-base lg:text-base">
                 {customer.address.street}, {customer.address.city},{" "}
                 {customer.address.state}, {customer.address.zip},{" "}
                 {customer.address.country}
@@ -212,31 +216,31 @@ const CustomerDetails = () => {
 
           <Link
             to="/customers"
-            className="text-white bg-slate-500 border-0 py-2 px-6 focus:outline-none hover:bg-slate-600 text-center rounded text-lg"
+            className="text-white bg-slate-500 border-0 py-2 px-6 focus:outline-none hover:bg-slate-600 text-center rounded text-[13px] md:text-lg lg:text-lg"
           >
             Back
           </Link>
           <div className="flex w-full gap-10 items-center justify-between py-5">
             <Link
               to={`/update/${id}`}
-              className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+              className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-[13px] md:text-lg lg:text-lg"
             >
               update {customer.firstName}
             </Link>
             <button
               onClick={handleDelete}
-              className="text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg"
+              className="text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-[13px] md:text-lg lg:text-lg"
             >
               delete {customer.firstName}
             </button>
           </div>
           <button
             onClick={togglePin}
-            className={`mt-4 py-2 px-6 rounded text-lg ${
+            className={`mt-4 py-1 md:py-2 lg:py-2 px-6 rounded text-lg ${
               isPinned
-                ? "bg-green-500 hover:bg-green-600"
-                : "bg-yellow-500 hover:bg-yellow-600"
-            } text-white`}
+                ? "bg-green-500 hover:bg-green-600 text-white"
+                : "bg-transparent hover:bg-white border border-indigo-500 "
+            } text-indigo-500 rounded-full text-[13px] md:text-lg lg:text-lg`}
           >
             {isPinned ? "Unpin Location" : "Pin Location"}
           </button>

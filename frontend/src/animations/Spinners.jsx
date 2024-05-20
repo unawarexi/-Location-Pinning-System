@@ -1,15 +1,15 @@
 import React from "react";
-import { RotatingLines, Rings } from "react-loader-spinner";
+import { RotatingLines, Rings, BallTriangle } from "react-loader-spinner";
 
 export const ViewSpinner = () => {
   return (
     <section className="text-gray-600 body-font h-[700px] flex items-center justify-center">
       <div className="container mx-auto flex flex-col items-center justify-center">
-        <RotatingLines
+        <BallTriangle
           visible={true}
-          height="192" // 2x original size (96 * 2)
-          width="192" // 2x original size (96 * 2)
-          color="#6366F1" // indigo-500 color
+          height="192"
+          width="192"
+          color="#6366F1"
           strokeWidth="5"
           animationDuration="0.75"
           ariaLabel="rotating-lines-loading"
@@ -32,9 +32,9 @@ export const DetailSpinner = () => {
       <div className="container mx-auto flex flex-col items-center justify-center">
         <Rings
           visible={true}
-          height="192" // 2x original size (96 * 2)
-          width="192" // 2x original size (96 * 2)
-          color="#6366F1" // indigo-500 color
+          height="192"
+          width="192"
+          color="#6366F1"
           strokeWidth="5"
           animationDuration="0.75"
           ariaLabel="rings-loading"

@@ -14,13 +14,13 @@ import { AuthProvider } from "./context/AuthContext";
 const App = () => {
   return (
     <AuthProvider>
-      <div className="max-w-7xl mx-auto">
+      <div className="lg:max-w-7xl md:max-w-7xl max-w-4xl mx-auto">
         <>
           <BrowserRouter>
             <MainLayout>
               <Routes>
-                <Route path="/auth" element={<GetStarted />} />
-                <Route path="/" element={<LandingPage />} />
+                <Route path="/" element={<GetStarted />} />
+                <Route path="/home" element={<LandingPage />} />
                 <Route path="/customers" element={<Customers />} />
                 <Route path="/create" element={<CreateCustomer />} />
                 <Route path="/customer/:id" element={<CustomerDetails />} />

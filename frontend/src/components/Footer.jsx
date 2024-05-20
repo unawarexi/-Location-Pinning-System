@@ -33,19 +33,11 @@ const Footer = () => {
           </a>
         </p>
         <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
-          <a className="text-gray-500">
-            <svg
-              fill="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              className="w-5 h-5"
-              viewBox="0 0 24 24"
-            >
-              <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
-            </svg>
-          </a>
-          <a className="ml-3 text-gray-500">
+          <a
+            href="https://x.com/oliggarchy"
+            target="_blank"
+            className="text-gray-500"
+          >
             <svg
               fill="currentColor"
               stroke-linecap="round"
@@ -57,7 +49,27 @@ const Footer = () => {
               <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
             </svg>
           </a>
-          <a className="ml-3 text-gray-500">
+          <a
+            href="https://github.com/unawarexi"
+            target="_blank"
+            className="ml-3 text-gray-500"
+          >
+            <svg
+              fill="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              className="w-5 h-5"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 .5a12 12 0 00-3.79 23.4c.6.11.82-.26.82-.57v-2.23c-3.34.72-4.04-1.61-4.04-1.61a3.18 3.18 0 00-1.34-1.76c-1.09-.74.08-.73.08-.73a2.5 2.5 0 011.82 1.22 2.56 2.56 0 003.5.98
+               2.54 2.54 0 01.76-1.61c-2.67-.31-5.47-1.34-5.47-5.95a4.67 4.67 0 011.24-3.22 4.34 4.34 0 01.12-3.18s1-.32 3.3 1.23a11.48 11.48 0 016 0c2.3-1.55 3.3-1.23 3.3-1.23a4.34 4.34 0 01.12 3.18
+                4.67 4.67 0 011.24 3.22c0 4.62-2.81 5.64-5.49 5.94a2.84 2.84 0 01.82 2.21v3.28c0 .32.22.68.82.57A12 12 0 0012 .5z"
+              ></path>
+            </svg>
+          </a>
+          <a className="ml-3 text-gray-500" target="_blank">
             <svg
               fill="none"
               stroke="currentColor"
@@ -71,7 +83,11 @@ const Footer = () => {
               <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
             </svg>
           </a>
-          <a className="ml-3 text-gray-500">
+          <a
+            href="https://linkedin.com/in/andrew-j-chukwuweike-se"
+            className="ml-3 text-gray-500 "
+            target="_blank"
+          >
             <svg
               fill="currentColor"
               stroke="currentColor"

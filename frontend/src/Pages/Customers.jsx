@@ -61,27 +61,34 @@ const Customers = () => {
         <div className="container px-5 py-24 mx-auto flex flex-wrap">
           <div className="flex justify-between items-center py-6 border-b border-gray-200 mb-6 w-full">
             <div>
-              <h1 className="text-4xl text-gray-800">Customers</h1>
+              <h1 className="lg:text-4xl md:text-2xl text-lg text-gray-800">
+                Customers
+              </h1>
             </div>
 
             <div className="bg-blue-500 px-4 py-2 rounded-full text-white font-semibold hover:bg-blue-700">
-              <Link to="/create">Create New Customer</Link>
+              <Link
+                to="/create"
+                className="text-[10px] md:text-base lg:text-base"
+              >
+                Create New Customer
+              </Link>
             </div>
           </div>
 
           <hr />
-          <div className="flex flex-wrap -m-4 w-full">
+          <div className="flex flex-wrap lg:-m-4 w-full">
             {customers.map((customer) => (
-              <div key={customer._id} className="p-4 lg:w-1/2 md:w-full">
-                <div className="flex border-2 rounded-lg border-gray-200 border-opacity-50 p-8 sm:flex-row flex-col">
-                  <div className="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 flex-shrink-0">
+              <div key={customer._id} className="p-4 lg:w-1/2 w-full">
+                <div className="flex border-2 rounded-lg border-gray-200 border-opacity-50 p-8 sm:flex-row flex-col text-center lg:text-start md:text-start">
+                  <div className="lg:w-16 lg:h-16 md:w-16 md:h-16 w-10 h-10 sm:mr-20 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 flex-shrink-0">
                     <svg
                       fill="none"
                       stroke="currentColor"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth="2"
-                      className="w-10 h-10"
+                      className="w-7 h-7 lg:w-10 lg:h-10 md:w-10 md:h-10"
                       viewBox="0 0 24 24"
                     >
                       <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
@@ -89,15 +96,15 @@ const Customers = () => {
                     </svg>
                   </div>
                   <div className="flex-grow">
-                    <h2 className="text-gray-900 text-lg title-font font-medium mb-3">
+                    <h2 className="text-gray-900 text-sm md:text-lg lg:text-lg title-font font-medium mb-3">
                       {customer.firstName} {customer.lastName}
                     </h2>
-                    <p className="leading-relaxed text-base">
+                    <p className="leading-relaxed text-sm md:text-base lg:text-base">
                       {customer.email}
                     </p>
                     <Link
                       to="/details"
-                      className="mt-3 text-blue-500 inline-flex items-center"
+                      className="mt-3 text-blue-500 inline-flex items-center text-sm md:text-lg lg:text-lg"
                       onClick={() => handleViewDetails(customer._id)}
                     >
                       View details
