@@ -1,4 +1,3 @@
-// controllers/userController.js
 const User = require("../models/UserModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -29,7 +28,7 @@ const registerUser = async (req, res) => {
 
     res.status(201).json({ token, user: { id: user._id, email } });
   } catch (error) {
-    console.log(error);
+    console.error("Error during user registration:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
@@ -59,7 +58,7 @@ const loginUser = async (req, res) => {
       user: { id: user._id, username: user.username, email: user.email },
     });
   } catch (error) {
-    console.log(error);
+    console.error("Error during user login:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
