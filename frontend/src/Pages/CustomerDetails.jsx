@@ -4,7 +4,7 @@ import { getCustomerById, deleteCustomer } from "../apis/CustomerCRUD";
 import { DetailSpinner } from "../animations/Spinners";
 import axios from "axios";
 
-const API_KEY = "AIzaSyDvMXISE_eS_n6IpW8JV2pT8p7XtYWh2Ek"; // replace with your actual API key
+const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 
 const CustomerDetails = () => {
   const { id } = useParams();
