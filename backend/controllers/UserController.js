@@ -29,6 +29,7 @@ const registerUser = async (req, res) => {
 
     res.status(201).json({ token, user: { id: user._id, email } });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: "Server error" });
   }
 };
@@ -58,6 +59,7 @@ const loginUser = async (req, res) => {
       user: { id: user._id, username: user.username, email: user.email },
     });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: "Server error" });
   }
 };
