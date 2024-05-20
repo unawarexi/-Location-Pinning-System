@@ -9,7 +9,13 @@ const customerRoutes = require("./routes/CustomerRoutes");
 
 const app = express();
 
-app.use(cors({ origin: true }));
+app.use(
+  cors({
+    origin: ["https://location.vercel.app"],
+    methods: ["POST, GET, PUT, UPDATE, DELETE"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 //Dotenv configuration
