@@ -14,7 +14,7 @@ require("dotenv").config();
 
 app.use(
   cors({
-    origin: ["https://system-location.vercel.app"],
+    origin: true["https://system-location.vercel.app"],
     methods: ["POST", "GET", "PUT", "UPDATE", "DELETE"],
     credentials: true,
   })
