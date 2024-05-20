@@ -11,11 +11,12 @@ const Customers = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+  //-------------------------- gets all customer data from DB
   useEffect(() => {
     const fetchCustomers = async () => {
       try {
         const response = await getAllCustomers();
-        console.log("API response:", response); // Debugging log
+        // console.log("API response:", response); // Debugging log
         if (response.data && Array.isArray(response.data)) {
           setCustomers(response.data);
         } else {
@@ -32,6 +33,7 @@ const Customers = () => {
     fetchCustomers();
   }, []);
 
+  // ----------------------------------------- handles specific view details of an :id
   const handleViewDetails = async (id) => {
     try {
       const response = await getCustomerById(id);
@@ -42,12 +44,15 @@ const Customers = () => {
     }
   };
 
+  // -------------- loader spinner when retrieving data
   if (loading)
     return (
       <div className="flex items-center justify-center">
         <ViewSpinner />
       </div>
     );
+
+  //------------------- error display when something goes wrong
   if (error)
     return (
       <div>
@@ -58,6 +63,8 @@ const Customers = () => {
   return (
     <section className="text-gray-600 body-font">
       <div className="container px-5 py-24 mx-auto flex flex-wrap">
+        {/* {=========================== HEADER FOR PAGE =========================} */}
+
         <div className="container px-5 py-24 mx-auto flex flex-wrap">
           <div className="flex justify-between items-center py-6 border-b border-gray-200 mb-6 w-full">
             <div>
@@ -77,6 +84,8 @@ const Customers = () => {
           </div>
 
           <hr />
+
+          {/* {=========================== MAPPING THROUGH RETURNED DATA AND POPULATE PAGE =========================} */}
           <div className="flex flex-wrap lg:-m-4 w-full">
             {customers.map((customer) => (
               <div key={customer._id} className="p-4 lg:w-1/2 w-full">
@@ -102,6 +111,8 @@ const Customers = () => {
                     <p className="leading-relaxed text-sm md:text-base lg:text-base">
                       {customer.email}
                     </p>
+
+                    {/* {=========================== LINKS THE DISPLAY OF SPECIFIC ID  PAGE =========================} */}
                     <Link
                       to="/details"
                       className="mt-3 text-blue-500 inline-flex items-center text-sm md:text-lg lg:text-lg"
