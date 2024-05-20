@@ -23,8 +23,8 @@ require("dotenv").config();
 const PORT = process.env.PORT || 5000;
 
 //Working with routes
-app.use("/api/users", userRoutes);
-app.use("/api/customers", customerRoutes);
+app.use("/users", userRoutes);
+app.use("/customers", customerRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server started at port ${PORT}`);
