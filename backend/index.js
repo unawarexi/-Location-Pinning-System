@@ -10,7 +10,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["https://system-location.vercel.app/api"],
+    origin: ["https://system-location.vercel.app"],
     methods: ["post", "get", "put", "update", "delete"],
     credentials: true,
   })
