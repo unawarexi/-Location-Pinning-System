@@ -1,5 +1,4 @@
 import React from "react";
-import LazyLoad from "react-lazyload";
 import {
   southAmerica,
   northAmerica,
@@ -75,13 +74,12 @@ const LandingGallery = () => {
               {imageArray.map((item, index) => (
                 <div key={index} className="p-4 md:w-full">
                   <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-                    <LazyLoad height={200} offset={100}>
-                      <img
-                        className="lg:h-48 h-36 w-full object-cover object-center"
-                        src={item.image}
-                        alt="gallery"
-                      />
-                    </LazyLoad>
+                    <img
+                      className="lg:h-48 h-36 w-full object-cover object-center"
+                      src={item.image}
+                      alt="gallery"
+                    />
+
                     <div className="p-6">
                       <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
                         CATEGORY
