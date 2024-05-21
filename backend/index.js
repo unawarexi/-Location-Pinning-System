@@ -12,8 +12,13 @@ app.use(express.json());
 // Dotenv configuration
 require("dotenv").config();
 
-// CORS configuration to allow requests from all origins and methods
-app.use(cors({ origin: "*" }));
+// CORS configuration to allow requests from your frontend origin
+app.use(
+  cors({
+    origin: "https://system-location.netlify.app",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
 
 // Default route to check if server is running
 app.get("/", (req, res) => {
