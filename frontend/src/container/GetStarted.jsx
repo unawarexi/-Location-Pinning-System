@@ -2,24 +2,25 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { registerUser, loginUser } from "../apis/UserCRUD";
+import { AuthSpinner } from "../animations/Spinners";
 
 const AUTH_MAP_API = import.meta.env.VITE_AUTH_MAP_API;
 
 const GetStarted = () => {
-  //-------------------------- handles Auth forms state
   const [isLogin, setIsLogin] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [authError, setAuthError] = useState("");
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
-  //-------------------------- handles location state
   const [location, setLocation] = useState({ lat: 0, lng: 0 });
   const navigate = useNavigate();
   const { login } = useAuth();
 
+  // Effect hook for fetching user location on component mount
   useEffect(() => {
-    //  user's location using  Geolocation API
     const fetchLocation = () => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
@@ -29,19 +30,18 @@ const GetStarted = () => {
               lng: position.coords.longitude,
             });
           },
+          // If geolocation is not supported, get current ip position
           (error) => {
             console.error("Error fetching location:", error);
-            // return to IP-based geolocation if user rejects permission request
             fetchIpLocation();
           }
         );
       } else {
-        // use this if Geolocation API is not supported
         fetchIpLocation();
       }
     };
 
-    //-------------------------- handles fetching of ip location
+    // Function to fetch location based on IP address
     const fetchIpLocation = async () => {
       try {
         const response = await fetch(AUTH_MAP_API);
@@ -55,11 +55,13 @@ const GetStarted = () => {
     fetchLocation();
   }, []);
 
-  //-------------------------- handles form button toggle and retain data onchange
+  // Function to toggle between login and signup forms
   const toggleForm = () => {
     setIsLogin(!isLogin);
+    setAuthError("");
   };
 
+  // Function to handle form input change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -68,31 +70,52 @@ const GetStarted = () => {
     });
   };
 
-  //-------------------------- handles login anf navigation submission
+  // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    setAuthError("");
+
     try {
       if (isLogin) {
-        const response = await loginUser(formData);
-        // console.log("User logged in:", response);
+        await loginUser(formData);
       } else {
-        const response = await registerUser(formData);
-        // console.log("User registered:", response);
+        await registerUser(formData);
       }
+
       setFormData({
         email: "",
         password: "",
       });
+
       login();
-      navigate("/home");
+
+      // Redirect to home page after a delay
+      setTimeout(() => {
+        setIsLoading(false);
+        navigate("/home");
+      }, 5000);
     } catch (error) {
       console.error("Error:", error);
+      if (error.response && error.response.data.message) {
+        setAuthError(error.response.data.message);
+      } else {
+        setAuthError("Invalid user Credentials. Please try again.");
+      }
+      setIsLoading(false);
     }
   };
 
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center">
+        <AuthSpinner />
+      </div>
+    );
+  }
+
   return (
     <section className="text-gray-600 body-font relative">
-      {/* {============================ handles background map with user location =========================} */}
       <div className="absolute inset-0 bg-gray-300 rounded-lg">
         <iframe
           width="100%"
@@ -112,13 +135,10 @@ const GetStarted = () => {
             {isLogin ? "Login" : "Sign Up"}
           </h2>
           <p className="leading-relaxed mb-5 text-gray-600">
-            Verify securely- then go get 'em before someone does!
+            Verify securely - then go get 'em before someone does!
           </p>
 
-          {/* {============================ handles Auth forms register and login =========================} */}
-
           <form onSubmit={handleSubmit}>
-            {/* Email */}
             <div className="relative mb-4">
               <label
                 htmlFor="email"
@@ -132,13 +152,11 @@ const GetStarted = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none
-                 text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                 required
               />
             </div>
 
-            {/* Password */}
             <div className="relative mb-4">
               <label
                 htmlFor="password"
@@ -152,18 +170,22 @@ const GetStarted = () => {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700
-                 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                 required
               />
             </div>
 
-            {/* {============================ handles form button  =========================} */}
+            {authError && (
+              <div className="text-red-500 mb-4 text-xs md:text-base lg:text-base">
+                {authError}
+              </div>
+            )}
+
             <button
               type="submit"
               className={`text-white border-0 py-2 px-6 focus:outline-none w-full rounded text-lg ${
                 isLogin
-                  ? " bg-gray-500 hover:bg-gray-600 "
+                  ? "bg-gray-500 hover:bg-gray-600"
                   : "bg-indigo-500 hover:bg-indigo-600"
               }`}
             >
@@ -171,7 +193,6 @@ const GetStarted = () => {
             </button>
           </form>
 
-          {/* ================================ Toggle between login and sign-up ============================*/}
           <p className="text-xs text-gray-500 mt-3">
             {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
             <span
