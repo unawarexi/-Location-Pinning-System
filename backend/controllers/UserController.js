@@ -26,6 +26,7 @@ const registerUser = async (req, res) => {
       expiresIn: "7h",
     });
 
+    // Send token in response and store in localStorage
     res.status(201).json({ token, user: { id: user._id, email } });
   } catch (error) {
     console.error("Error during user registration:", error);
@@ -53,6 +54,7 @@ const loginUser = async (req, res) => {
       expiresIn: "7h",
     });
 
+    // Send token in response and store in localStorage
     res.json({
       token,
       user: { id: user._id, username: user.username, email: user.email },
