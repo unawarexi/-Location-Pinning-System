@@ -16,7 +16,6 @@ require("dotenv").config();
 app.use(
   cors({
     origin: "https://system-location.netlify.app",
-    methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
 
