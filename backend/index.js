@@ -2,30 +2,25 @@ const express = require("express");
 const cors = require("cors");
 const { connectDB } = require("./config/dbconfig");
 
-//Routes importing
+// Routes importing
 const userRoutes = require("./routes/userRoutes");
 const customerRoutes = require("./routes/CustomerRoutes");
 
 const app = express();
 app.use(express.json());
 
-//Dotenv configuration
+// Dotenv configuration
 require("dotenv").config();
 
-app.use(
-  cors({
-    origin: true,
-    methods: ["POST", "GET", "PUT", "UPDATE", "DELETE"],
-    credentials: true,
-  })
-);
+// CORS configuration to allow requests from all origins and methods
+app.use(cors({ origin: "*" }));
 
-//  controllers
+// Default route to check if server is running
 app.get("/", (req, res) => {
-  res.send("server is running..");
+  res.send("Server is running..");
 });
 
-//Working with routes
+// Working with routes
 app.use("/api/users", userRoutes);
 app.use("/api/customers", customerRoutes);
 
