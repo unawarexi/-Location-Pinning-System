@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  box-sizing: border-box;
+  outline: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 @keyframes bounce {
   0%,
   100% {
