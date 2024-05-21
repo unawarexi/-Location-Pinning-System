@@ -15,7 +15,7 @@ require("dotenv").config();
 // CORS configuration to allow requests from your frontend origin
 app.use(
   cors({
-    origin: "https://system-location.netlify.app",
+    origin: "https://system-location.onrender.com",
   })
 );
 
